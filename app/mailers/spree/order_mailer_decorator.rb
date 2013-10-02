@@ -9,7 +9,8 @@ Spree::OrderMailer.class_eval do
     :subject => subject)
   end
 
-  def cancel_email(order, resend=false)
+  def cancel_email(order_id, resend=false)
+    order = Spree::Order.where(:id=>order_id)
     @order = order
     I18n.locale = order.locale
     subject = (resend ? "[#{t(:resend).upcase}] " : "")
