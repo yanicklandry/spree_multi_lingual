@@ -1,6 +1,7 @@
 Spree::OrderMailer.class_eval do
   # There might be a cleaner way to set locale instead of rewriting each method
-  def confirm_email(order, resend=false)
+  def confirm_email(order_id, resend=false)
+    order = Spree::Order.find(order_id)
     @order = order
     I18n.locale = order.locale
     subject = (resend ? "[#{t(:resend).upcase}] " : "")
